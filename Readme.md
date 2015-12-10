@@ -1,1 +1,1 @@
-Cooper Union Words Proxy
+Cooper Union Foursquare Proxy

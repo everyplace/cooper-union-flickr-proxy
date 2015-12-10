@@ -1,4 +1,5 @@
-var request = require('request');
+var request = require('request'),
+    foursquare = require('node-foursquare-venues')(process.env.clientId, process.env.clientSecret);
 
 exports.json = function(req, res, next) {
   res.set({
@@ -14,36 +15,35 @@ exports.index = function(req, res){
   res.render('template', {
     title: 'Serving a real template',
     name: path,
-    description:'Sample links for the Parts of Speech API',
+    description:'Sample links for the Foursquare Venue Search API',
     examples:[{
-      url:"/words?phrase=the quick brown fox jumps over the lazy dog",
-      title:"Text parsing for 'the quick brown fox jumps over the lazy dog'."
+      url:"/trending?ll=40.7293461,-73.9905962",
+      title:"Searching for trending places around Cooper Union"
+    },
+    {
+      url:"/venue/3fd66200f964a52035e41ee3",
+      title:"Get information on a venue id, specifically Webster Hall"
     }]
   });
 };
 
-exports.words = function(req, res){
-  var path = (req.url.substring(1));
-  var query = req.query.phrase;
-  if((query != null) && query != "") {
+exports.venue = function(req, res) {
+  //comment again
+  var searchObj = req.query;
 
-    var url = "http://parts-of-speech.info/tagger/postagger?text="+query;
-    request(url, function(err, response, body){
-      var data = JSON.stringify({
-        phrase: JSON.parse(body.split("callback(")[1].split(");")[0]).taggedText
-      });
-
-      res.end(data);
-    })
-  } else {
-
-    res.end(JSON.stringify({
-      error:"No valid query. Please use ?phrase=<sentence> to get a valid response."
-    }))
-
-  }
+  foursquare.venues.venue(req.params.id, searchObj, function(err, response){
+    res.end(JSON.stringify(response));
+  });
 };
 
+exports.trending = function(req, res) {
+  //comment again
+  var searchObj = req.query;
+
+  foursquare.venues.trending(searchObj, function(err, response){
+    res.end(JSON.stringify(response));
+  });
+};
 
 
 exports.template = function(req, res){

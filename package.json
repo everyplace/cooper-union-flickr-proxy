@@ -1,6 +1,6 @@
 {
-  "name": "cooper-union-words-proxy",
-  "repository": "https://github.com/everyplace/cooper-union-words-proxy.git",
+  "name": "cooper-union-foursquare-proxy",
+  "repository": "https://github.com/everyplace/cooper-union-foursquare-proxy.git",
   "version": "0.3.0",
   "dependencies": {
     "apicache": "0.0.12",
@@ -9,6 +9,7 @@
     "favicon": "0.0.2",
     "http": "0.0.0",
     "morgan": "1.5.1",
+    "node-foursquare-venues": "^1.1.0",
     "reload": "^0.7.0",
     "request": "2.53.0",
     "tabletop": "1.3.5"
