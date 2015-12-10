@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.get('/test', routes.template);
 app.get('/', routes.index);
 app.get('/venue/:id', routes.json, routes.venue);
-app.get('/trending', routes.json, routes.venue);
+app.get('/trending', routes.json, routes.trending);
 
 
 var server = http.createServer(app);
