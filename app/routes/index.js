@@ -1,5 +1,4 @@
-var request = require('request'),
-    foursquare = require('node-foursquare-venues')(process.env.clientId, process.env.clientSecret);
+var request = require('request');
 
 exports.json = function(req, res, next) {
   res.set({
