@@ -1,1 +1,2 @@
-Cooper Union Foursquare Proxy
+Cooper Union Flickr Proxy
+https://cooper-union-flickr-proxy.herokuapp.com

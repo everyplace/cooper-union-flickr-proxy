@@ -1,18 +1,17 @@
 {
-  "name": "cooper-union-foursquare-proxy",
-  "repository": "https://github.com/everyplace/cooper-union-foursquare-proxy.git",
+  "name": "cooper-union-flickr-proxy",
+  "repository": "https://github.com/everyplace/cooper-union-flickr-proxy.git",
   "version": "0.3.0",
   "dependencies": {
     "apicache": "0.0.12",
     "express": "4.12.0",
     "express-handlebars": "1.2.1",
     "favicon": "0.0.2",
+    "flickrapi": "^0.4.2",
     "http": "0.0.0",
     "morgan": "1.5.1",
-    "node-foursquare-venues": "^1.1.0",
     "reload": "^0.7.0",
     "request": "2.53.0",
-    "tabletop": "1.3.5"
   },
   "engines": {
     "node": "4.2.x",

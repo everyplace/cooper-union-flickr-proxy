@@ -16,7 +16,7 @@ var hbs = exphbs.create({
   layoutsDir:'app/views/layouts'
 });
 
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 3000);
 app.engine('handlebars', hbs.engine);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
@@ -36,5 +36,5 @@ var server = http.createServer(app);
 
 //initiate the app server
 server.listen(app.get('port'), function(){
-  console.log("cooper union foursquare proxy " + app.get('port'));
+  console.log("cooper union flickr proxy " + app.get('port'));
 });

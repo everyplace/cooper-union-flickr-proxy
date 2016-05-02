@@ -15,7 +15,7 @@ exports.index = function(req, res){
   res.render('template', {
     title: 'Serving a real template',
     name: path,
-    description:'Sample links for the Foursquare Venue Search API',
+    description:'Sample links for the Flickr API',
     examples:[{
       url:"/trending?ll=40.7293461,-73.9905962",
       title:"Searching for trending places around Cooper Union"
