@@ -52,6 +52,7 @@ exports.search = function(req, res){
             large:"https://c1.staticflickr.com/" + photo.farm+"/"+photo.server+"/"+photo.id+"_"+photo.secret+"_b.jpg",
             small:"https://c1.staticflickr.com/" + photo.farm+"/"+photo.server+"/"+photo.id+"_"+photo.secret+"_m.jpg"
           }
+          result.photos.photo[i].url = "https://www.flickr.com/photos/"+photo.owner+"/"+photo.id;
         }
 
         res.end(JSON.stringify(result));
