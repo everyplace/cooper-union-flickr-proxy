@@ -1,4 +1,10 @@
-var request = require('request');
+var request = require('request'),
+    Flickr = require("flickrapi"),
+    flickrOptions = {
+      api_key: process.env.FLICKR_KEY,
+      secret: process.env.FLICKR_SECRET
+    };
+
 
 exports.json = function(req, res, next) {
   res.set({
@@ -16,31 +22,45 @@ exports.index = function(req, res){
     name: path,
     description:'Sample links for the Flickr API',
     examples:[{
-      url:"/trending?ll=40.7293461,-73.9905962",
-      title:"Searching for trending places around Cooper Union"
+      url:"/search?text=Cooper Union",
+      title:"Search for 100 photos with any text describing Cooper Union"
     },
     {
-      url:"/venue/3fd66200f964a52035e41ee3",
-      title:"Get information on a venue id, specifically Webster Hall"
+      url:"/search?text=Cooper Union&count=1",
+      title:"Search for 1 photos with any text describing Cooper Union (count can be up to 500)"
     }]
   });
 };
 
-exports.venue = function(req, res) {
-  //comment again
-  var searchObj = req.query;
+exports.search = function(req, res){
 
-  foursquare.venues.venue(req.params.id, searchObj, function(err, response){
-    res.end(JSON.stringify(response));
-  });
-};
 
-exports.trending = function(req, res) {
-  //comment again
-  var searchObj = req.query;
+  Flickr.tokenOnly(flickrOptions, function(error, flickr) {
+    // we can now use "flickr" as our API object,
+    // but we can only call public methods and access public data
+    if(("text" in req.query)&&(req.query.text.length>0)){
 
-  foursquare.venues.trending(searchObj, function(err, response){
-    res.end(JSON.stringify(response));
+      flickr.photos.search({
+        text:req.query.text,
+        page: 1,
+        per_page: req.query.count || 100
+      }, function(err, result) {
+
+        for(var i in result.photos.photo){
+          var photo = result.photos.photo[i];
+          result.photos.photo[i].sizes={
+            large:"https://c1.staticflickr.com/" + photo.farm+"/"+photo.server+"/"+photo.id+"_"+photo.secret+"_b.jpg",
+            small:"https://c1.staticflickr.com/" + photo.farm+"/"+photo.server+"/"+photo.id+"_"+photo.secret+"_m.jpg"
+          }
+        }
+
+        res.end(JSON.stringify(result));
+      });
+    } else {
+      res.end(JSON.stringify({"error":"no text search term"}));
+    }
+
+
   });
 };
 

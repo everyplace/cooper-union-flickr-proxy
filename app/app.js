@@ -27,8 +27,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 //configure routes
 app.get('/test', routes.template);
 app.get('/', routes.index);
-app.get('/venue/:id', routes.json, routes.venue);
-app.get('/trending', routes.json, routes.trending);
+app.get('/search', routes.json, routes.search);
 
 
 var server = http.createServer(app);
